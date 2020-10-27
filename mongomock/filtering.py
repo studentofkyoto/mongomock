@@ -96,7 +96,8 @@ class _Filterer(object):
                 not isinstance(search, dict) or (set(search.keys()) - {'$ne', '$nin'})
             has_candidates = False
 
-            if search == {'$exists': False} and not iter_key_candidates(key, document):
+            if search in [{'$exists': False}, None, {'$eq': None}] \
+                and not iter_key_candidates(key, document):
                 continue
 
             if isinstance(search, dict) and '$all' in search:
